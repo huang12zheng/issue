@@ -1,0 +1,30 @@
+# import * from "./generated/schema/prisma.graphql"
+
+type Query {
+  users: [User]!
+  queryHash(where: QueryHashWhereInput!): QueryHash!
+}
+
+type Mutation {
+  signup(
+    name: String!
+    password: String!
+  ): AuthPayload!
+  login(name: String!, password: String!): AuthPayload!
+  createUser(data: UserCreateInput!): User!
+  updateManyUsers(data: UserUpdateManyMutationInput!, where: UserWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+type Subscription {
+  user: UserSubscriptionPayload
+}
+
+type AuthPayload {
+  token: String!
+  user: User!
+}
+
+type MutationResult {
+  success: Boolean!
+}
